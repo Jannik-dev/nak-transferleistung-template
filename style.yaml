@@ -1,0 +1,15 @@
+---
+bibliography: cites.bib
+lang: de-DE
+mainfont: Times New Roman
+fontsize: 12pt
+linestretch: 1.25
+papersize: a4
+classoption:
+- onecolumn
+- oneside
+margin-left: 2cm
+margin-right: 2cm
+margin-top: 2cm
+margin-bottom: 2cm
+...
