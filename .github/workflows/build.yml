@@ -1,0 +1,46 @@
+name: Build
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+	- name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get -y install texlive ttf-mscorefonts-installer texlive-latex-extra texlive-xetex
+      - name: Install pandoc
+        run: |
+          wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
+          sudo dpkg -i pandoc-2.19-1-amd64.deb
+	- name: Install pdf-merge
+	  run: |
+	    sudo apt-get install pdftk -y
+      - name: Build PDFs
+        working-directory: ${{ github.workspace }}
+        run: |
+           for TL in ./T*/;
+           do
+           echo $TL
+           cd "$TL"
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o output.pdf
+           cd ..
+           done
+	- name: Run LanguageTool with reviewdog
+	  uses: reviewdog/action-languagetool@v1.8.2
+	- name: Combine pdfs
+	  id: combine
+	  uses: amoeba/combine-pdf-action@v1
+	  with:
+	    path: ./T*
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: transferleistungen
+          path: ./*/*.pdf

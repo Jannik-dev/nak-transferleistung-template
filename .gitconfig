@@ -1,0 +1,6 @@
+#Include with "git config --local include.path ../.gitconfig"
+[diff "pandoc"]
+  textconv=pandoc --to=markdown
+  prompt = false
+[alias]
+  wdiff = diff --word-diff=color --unified=1
