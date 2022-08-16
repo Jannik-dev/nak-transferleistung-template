@@ -44,8 +44,3 @@ jobs:
         with:
           name: ${{env.filename}}
           path: ${{env.path}}/${{env.filename}}.pdf
-      - name: Upload
-        uses: actions/upload-artifact@v3
-        with:
-          name: transferleistungen
-          path: ./*/*.pdf
