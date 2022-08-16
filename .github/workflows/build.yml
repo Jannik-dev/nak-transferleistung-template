@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      path: ./TL1/
+      filename: output
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -32,11 +35,15 @@ jobs:
         uses: reviewdog/action-languagetool@v1.8.2
         with:
           github_token: ${{ secrets.github_token }}
-      - name: Combine pdfs
-        id: combine
-        uses: amoeba/combine-pdf-action@v1
+      - uses: elMuso/MergePDFs-action@1.1
         with:
-          path: ./TL1/
+          path: ${{env.path}}
+          filename: ${{env.filename}}
+      - name: Upload combined pdf
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{env.filename}}
+          path: ${{env.path}}/${{env.filename}}.pdf
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
