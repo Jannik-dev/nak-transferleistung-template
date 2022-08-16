@@ -1,0 +1,17 @@
+name: Spellchecking
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Run LanguageTool with reviewdog
+        uses: reviewdog/action-languagetool@v1.8.2
+        with:
+          language: de-DE
+          github_token: ${{ secrets.the_token }}
+          reporter: github-pr-review
+          level: warning
