@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-	- name: Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
       - name: Install dependencies
         run: |
@@ -19,9 +19,6 @@ jobs:
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb
-	- name: Install pdf-merge
-	  run: |
-	    sudo apt-get install pdftk -y
       - name: Build PDFs
         working-directory: ${{ github.workspace }}
         run: |
@@ -32,13 +29,15 @@ jobs:
            pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o output.pdf
            cd ..
            done
-	- name: Run LanguageTool with reviewdog
-	  uses: reviewdog/action-languagetool@v1.8.2
-	- name: Combine pdfs
-	  id: combine
-	  uses: amoeba/combine-pdf-action@v1
-	  with:
-	    path: ./T*
+      - name: Run LanguageTool with reviewdog
+        uses: reviewdog/action-languagetool@v1.8.2
+        with:
+          github_token: ${{ secrets.github_token }}
+      - name: Combine pdfs
+        id: combine
+        uses: amoeba/combine-pdf-action@v1
+        with:
+          path: ./T*/
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
