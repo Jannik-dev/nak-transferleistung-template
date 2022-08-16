@@ -36,7 +36,7 @@ jobs:
         id: combine
         uses: amoeba/combine-pdf-action@v1
         with:
-          path: ./T*/
+          path: ./TL1/
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
