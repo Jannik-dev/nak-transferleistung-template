@@ -9,6 +9,7 @@ jobs:
     env:
       path: ./TL1/
       filename: output
+      panname: pan
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -21,6 +22,8 @@ jobs:
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb
+      - name: Install pdftk
+        run: sudo snap install pdftk
       - name: Build PDFs
         working-directory: ${{ github.workspace }}
         run: |
@@ -28,17 +31,15 @@ jobs:
            do
            echo $TL
            cd "$TL"
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o output.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o ${{env.path}}.pdf
            cd ..
            done
       - name: Run LanguageTool with reviewdog
         uses: reviewdog/action-languagetool@v1.8.2
         with:
           github_token: ${{ secrets.github_token }}
-      - uses: elMuso/MergePDFs-action@1.1
-        with:
-          path: ${{env.path}}
-          filename: ${{env.filename}}
+      - name: Combine pdfs
+        run: pdftk ${{env.path}}/0_titlepage.pdf ${{env.path}}/${{env.path}}.pdf cat output ${{env.filename}}.pdf
       - name: Upload combined pdf
         uses: actions/upload-artifact@v3
         with:
