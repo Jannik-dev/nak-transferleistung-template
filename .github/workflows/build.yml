@@ -31,7 +31,7 @@ jobs:
            do
            echo $TL
            cd "$TL"
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o ${{env.path}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o ${{env.panname}}.pdf
            cd ..
            done
       - name: Run LanguageTool with reviewdog
@@ -39,7 +39,7 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
       - name: Combine pdfs
-        run: pdftk ${{env.path}}/0_titlepage.pdf ${{env.path}}/${{env.path}}.pdf cat output ${{env.filename}}.pdf
+        run: pdftk ${{env.path}}/0_titlepage.pdf ${{env.path}}/${{env.panname}}.pdf cat output ${{env.filename}}.pdf
       - name: Upload combined pdf
         uses: actions/upload-artifact@v3
         with:
