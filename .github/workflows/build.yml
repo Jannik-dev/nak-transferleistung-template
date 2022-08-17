@@ -41,7 +41,7 @@ jobs:
            do
            echo ${TL}
            cd ${TL}
-           pdftk ${{env.GITHUB_WORKSPACE}}/${{env.titlepage}} ${{env.tmp}}.pdf cat output ${TL}${{env.filename}}.pdf
+           pdftk titlepage.pdf ${{env.tmp}}.pdf cat output ${TL}${{env.filename}}.pdf
            cd ..
            done
       - name: Upload combined PDFs
