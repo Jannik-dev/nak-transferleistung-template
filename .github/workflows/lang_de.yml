@@ -1,6 +1,13 @@
 name: Spellchecking (de)
 on:
   pull_request:
+    branches:
+      - 'de-*'
+      - '*-de'
+      - '*-de-*'
+      - 'de_*'
+      - '*_de'
+      - '*_de_*'
 
 jobs:
   LanguageTool:
