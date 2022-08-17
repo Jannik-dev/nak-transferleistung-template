@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       folder: TL1
+      md_files: 0_start.md 1_main.md 2_test.md 3_end.md
       filename: output
       arial: arial
       tnr: tnr
@@ -29,8 +30,8 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: |
            cd ${{env.folder}}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_arial.yaml main.md -o ${{env.arial}}.pdf
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_tnr.yaml main.md -o ${{env.tnr}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_arial.yaml ${{env.md_files}} -o ${{env.arial}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_tnr.yaml ${{env.md_files}} -o ${{env.tnr}}.pdf
            cd ..
       - name: Combine PDFs
         run: |

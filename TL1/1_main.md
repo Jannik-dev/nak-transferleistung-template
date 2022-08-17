@@ -1,5 +1,3 @@
-\newpage
-
 ---
 title-meta: 'Very Title'
 ...
@@ -18,5 +16,3 @@ Oh Baby, a Triple!
 @androidInterviews
 
 \newpage
-
-# Literaturverzeichnis
