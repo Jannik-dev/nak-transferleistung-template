@@ -1,7 +1,7 @@
 ---
 title-meta: 'The title goes here'
+documentclass: book
 ...
-
 \mainmatter
 
-[//]: # write your text here 
+Write your text here... 

@@ -1,3 +1,6 @@
+---
+documentclass: book
+...
 \newpage
 \backmatter
 
