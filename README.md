@@ -3,7 +3,7 @@
 Mit diesem Template könnt ihr Transferleistungen mit Markdown schreiben. Dank der GitHub Actions müsst ihr euch keine Gedanken über die PDF Generierung und dem hinzufügen des Deckblattes machen. 
 
 ### Note:
-Es sollte bei der Nutzung neue Branches für die Markdown Dateien angelegt werden, damit LanguageTool die Rechtschreibung bei einer Pull request überprüfen kann.
+Es sollte bei der Nutzung neue Branches für die Markdown Dateien angelegt werden, damit LanguageTool die Rechtschreibung bei einer Pull request überprüfen kann (der Name der Branch muss je nach Sprache en oder de enthalten).
 
 ## Aktuellste Dateien
 Templates:
