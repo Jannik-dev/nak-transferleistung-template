@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{env.filename}}
-          path: ${{env.folder}}/${{env.folder}}_${{env.filename}}*.pdf
+          path: ${{env.folder}}/${{env.folder}}_*_${{env.filename}}*.pdf
