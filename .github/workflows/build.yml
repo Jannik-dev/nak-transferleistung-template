@@ -10,7 +10,8 @@ jobs:
       paths: "TL1 TL2 TL3 TL4 TL5 TL6"
       filename: output
       titlepage: templates/2022_07_Deckblatt_Transferleistung.pdf
-      tmp: pan
+      arial: arial
+      tnr: tnr
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -32,7 +33,8 @@ jobs:
            do
            echo ${TL}
            cd ${TL}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o ${{env.tmp}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_arial.yaml main.md -o ${{env.arial}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_tnr.yaml main.md -o ${{env.tnr}}.pdf
            cd ..
            done
       - name: Combine PDFs
@@ -41,11 +43,12 @@ jobs:
            do
            echo ${TL}
            cd ${TL}
-           pdftk titlepage.pdf ${{env.tmp}}.pdf cat output ${TL}${{env.filename}}.pdf
+           pdftk titlepage.pdf ${{env.arial}}.pdf cat output ${TL}_${{env.arial}}_${{env.filename}}.pdf
+           pdftk titlepage.pdf ${{env.tnr}}.pdf cat output ${TL}_${{env.tnr}}_${{env.filename}}.pdf
            cd ..
            done
       - name: Upload combined PDFs
         uses: actions/upload-artifact@v3
         with:
           name: ${{env.filename}}
-          path: ./*/*${{env.filename}}.pdf
+          path: ./*/*${{env.filename}}*.pdf
