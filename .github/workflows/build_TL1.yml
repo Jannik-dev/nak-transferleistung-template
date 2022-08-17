@@ -11,6 +11,8 @@ jobs:
       md_files: 0_start.md 1_main.md a_end.md
       name_for_arial: arial
       name_for_tnr: tnr
+      style_file_arial: style_en_arial.yaml
+      style_file_tnr: style_en_tnr.yaml
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -29,8 +31,8 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: |
            cd ${{env.folder}}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_arial.yaml ${{env.md_files}} -o ${{env.name_for_arial}}.pdf
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_tnr.yaml ${{env.md_files}} -o ${{env.name_for_tnr}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../${{env.style_file_arial}} ${{env.md_files}} -o ${{env.name_for_arial}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../${{env.style_file_tnr}} ${{env.md_files}} -o ${{env.name_for_tnr}}.pdf
            cd ..
       - name: Combine PDFs
         run: |

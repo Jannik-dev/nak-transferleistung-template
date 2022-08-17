@@ -1,0 +1,15 @@
+---
+bibliography: cites.bib
+lang: en-GB
+mainfont: Arial
+fontsize: 11pt
+linestretch: 1.25
+papersize: a4
+classoption:
+- onecolumn
+- oneside
+margin-left: 2cm
+margin-right: 2cm
+margin-top: 2cm
+margin-bottom: 2cm
+...
