@@ -1,13 +1,6 @@
-name: Spellchecking (en)
+name: Spellchecking
 on:
   pull_request:
-    branches:
-      - 'en-*'
-      - '*-en'
-      - '*-en-*'
-      - 'en_*'
-      - '*_en'
-      - '*_en_*'
 
 jobs:
   LanguageTool:
@@ -18,7 +11,6 @@ jobs:
       - name: Run LanguageTool with reviewdog
         uses: reviewdog/action-languagetool@v1.8.2
         with:
-          language: en-GB
           disabled_categories: ''
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
