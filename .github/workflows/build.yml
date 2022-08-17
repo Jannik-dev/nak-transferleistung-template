@@ -34,11 +34,6 @@ jobs:
            pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o ${{env.panname}}.pdf
            cd ..
            done
-      - name: Run LanguageTool with reviewdog
-        uses: reviewdog/action-languagetool@v1.8.2
-        with:
-          github_token: ${{ secrets.the_token }}
-          reporter: github-check
       - name: Combine pdfs
         run: pdftk ${{env.path}}/0_titlepage.pdf ${{env.path}}/${{env.panname}}.pdf cat output ${{env.path}}/${{env.filename}}.pdf
       - name: Upload combined pdf
