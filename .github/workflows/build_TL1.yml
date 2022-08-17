@@ -7,10 +7,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      folder: TL1
-      titlepage: titlepage.pdf
-      md_files: 0_start.md 1_main.md a_end.md
-      styles: style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.yaml
+
+################################### edit from here ##########################################
+
+      folder: TL1                                                                            # the name of the folder where the 'Transferleistung' is located
+      titlepage: titlepage.pdf                                                               # the name of the titlepage (has to be a pdf)
+      md_files: 0_start.md 1_example.md a_end.md                                             # specify the order of the markdown files
+      styles: style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.yaml    # you should only use one language in this job - choose one (if you want both than create a new folder)
+
+################################### edit to here   ##########################################
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
