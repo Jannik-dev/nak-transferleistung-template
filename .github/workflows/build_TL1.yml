@@ -1,0 +1,45 @@
+name: Build TL1
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      folder: TL1
+      filename: output
+      arial: arial
+      tnr: tnr
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get -y install texlive ttf-mscorefonts-installer texlive-latex-extra texlive-xetex
+      - name: Install pandoc
+        run: |
+          wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
+          sudo dpkg -i pandoc-2.19-1-amd64.deb
+      - name: Install pdftk
+        run: sudo apt install pdftk -y
+      - name: Build PDFs
+        working-directory: ${{ github.workspace }}
+        run: |
+           cd ${{env.folder}}
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_arial.yaml main.md -o ${{env.arial}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_tnr.yaml main.md -o ${{env.tnr}}.pdf
+           cd ..
+      - name: Combine PDFs
+        run: |
+           cd ${{env.folder}}
+           pdftk titlepage.pdf ${{env.arial}}.pdf cat output ${{env.folder}}_${{env.arial}}_${{env.filename}}.pdf
+           pdftk titlepage.pdf ${{env.tnr}}.pdf cat output ${{env.folder}}_${{env.tnr}}_${{env.filename}}.pdf
+           cd ..
+      - name: Upload combined PDFs
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{env.filename}}
+          path: ${{env.folder}}/${{env.folder}}_${{env.filename}}*.pdf

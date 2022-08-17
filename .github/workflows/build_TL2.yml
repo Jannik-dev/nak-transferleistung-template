@@ -1,4 +1,4 @@
-name: Build
+name: Build TL2
 on:
   push:
   workflow_dispatch:
@@ -7,9 +7,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      paths: "TL1 TL2 TL3 TL4 TL5 TL6"
+      folder: TL2
       filename: output
-      titlepage: templates/2022_07_Deckblatt_Transferleistung.pdf
       arial: arial
       tnr: tnr
     steps:
@@ -25,30 +24,22 @@ jobs:
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb
       - name: Install pdftk
-        run: sudo snap install pdftk
+        run: sudo apt install pdftk -y
       - name: Build PDFs
         working-directory: ${{ github.workspace }}
         run: |
-           for TL in ${{env.paths}};
-           do
-           echo ${TL}
-           cd ${TL}
+           cd ${{env.folder}}
            pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_arial.yaml main.md -o ${{env.arial}}.pdf
            pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_tnr.yaml main.md -o ${{env.tnr}}.pdf
            cd ..
-           done
       - name: Combine PDFs
         run: |
-           for TL in ${{env.paths}};
-           do
-           echo ${TL}
-           cd ${TL}
-           pdftk titlepage.pdf ${{env.arial}}.pdf cat output ${TL}_${{env.arial}}_${{env.filename}}.pdf
-           pdftk titlepage.pdf ${{env.tnr}}.pdf cat output ${TL}_${{env.tnr}}_${{env.filename}}.pdf
+           cd ${{env.folder}}
+           pdftk titlepage.pdf ${{env.arial}}.pdf cat output ${{env.folder}}_${{env.arial}}_${{env.filename}}.pdf
+           pdftk titlepage.pdf ${{env.tnr}}.pdf cat output ${{env.folder}}_${{env.tnr}}_${{env.filename}}.pdf
            cd ..
-           done
       - name: Upload combined PDFs
         uses: actions/upload-artifact@v3
         with:
           name: ${{env.filename}}
-          path: ./*/*${{env.filename}}*.pdf
+          path: ${{env.folder}}/${{env.folder}}_${{env.filename}}*.pdf
