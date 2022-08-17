@@ -7,9 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      path: ./TL1/
+      paths: (TL1 TL2 TL3 TL4 TL5 TL6)
       filename: output
-      panname: pan
+      titlepage: templates/2022_07_Deckblatt_Transferleistung.pdf
+      tmp: pan
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -27,17 +28,24 @@ jobs:
       - name: Build PDFs
         working-directory: ${{ github.workspace }}
         run: |
-           for TL in ./T*/;
+           for TL in ${{env.paths}};
            do
-           echo $TL
-           cd "$TL"
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o ${{env.panname}}.pdf
+           echo ${TL}
+           cd ${TL}
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style.yaml main.md -o ${{env.tmp}}.pdf
            cd ..
            done
-      - name: Combine pdfs
-        run: pdftk ${{env.path}}/0_titlepage.pdf ${{env.path}}/${{env.panname}}.pdf cat output ${{env.path}}/${{env.filename}}.pdf
-      - name: Upload combined pdf
+      - name: Combine PDFs
+        run: |
+           for TL in ${{env.paths}};
+           do
+           echo ${TL}
+           cd ${TL}
+           pdftk ${{env.GITHUB_WORKSPACE}}/${{env.titlepage}} ${{env.tmp}}.pdf cat output ${TL}${{env.filename}}.pdf
+           cd ..
+           done
+      - name: Upload combined PDFs
         uses: actions/upload-artifact@v3
         with:
           name: ${{env.filename}}
-          path: ${{env.path}}/${{env.filename}}.pdf
+          path: ./*/*${{env.filename}}.pdf
