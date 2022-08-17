@@ -8,10 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       folder: TL1
-      md_files: 0_start.md 1_main.md 2_test.md 3_end.md
-      filename: output
-      arial: arial
-      tnr: tnr
+      md_files: 0_start.md 1_main.md a_end.md
+      name_for_arial: arial
+      name_for_tnr: tnr
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -30,17 +29,17 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: |
            cd ${{env.folder}}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_arial.yaml ${{env.md_files}} -o ${{env.arial}}.pdf
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_tnr.yaml ${{env.md_files}} -o ${{env.tnr}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_arial.yaml ${{env.md_files}} -o ${{env.name_for_arial}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../style_tnr.yaml ${{env.md_files}} -o ${{env.name_for_tnr}}.pdf
            cd ..
       - name: Combine PDFs
         run: |
            cd ${{env.folder}}
-           pdftk titlepage.pdf ${{env.arial}}.pdf cat output ${{env.folder}}_${{env.arial}}_${{env.filename}}.pdf
-           pdftk titlepage.pdf ${{env.tnr}}.pdf cat output ${{env.folder}}_${{env.tnr}}_${{env.filename}}.pdf
+           pdftk titlepage.pdf ${{env.name_for_arial}}.pdf cat output ${{env.folder}}_${{env.name_for_arial}}.pdf
+           pdftk titlepage.pdf ${{env.name_for_tnr}}.pdf cat output ${{env.folder}}_${{env.name_for_tnr}}.pdf
            cd ..
       - name: Upload combined PDFs
         uses: actions/upload-artifact@v3
         with:
           name: ${{env.filename}}
-          path: ${{env.folder}}/${{env.folder}}_*_${{env.filename}}*.pdf
+          path: ${{env.folder}}/${{env.folder}}_*.pdf
