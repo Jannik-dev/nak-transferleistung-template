@@ -41,5 +41,5 @@ jobs:
       - name: Upload combined PDFs
         uses: actions/upload-artifact@v3
         with:
-          name: ${{env.filename}}
+          name: output
           path: ${{env.folder}}/${{env.folder}}_*.pdf
