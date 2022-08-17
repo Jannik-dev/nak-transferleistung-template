@@ -10,9 +10,9 @@ Templates:
 
 https://moodle2.nordakademie.de/course/view.php?id=1584&section=4
 
-Style (Seite 4):  
+Style - Merkblatt Transferleistungen (Seite 4):  
 
-https://moodle2.nordakademie.de/pluginfile.php/269681/mod_resource/content/7/2022_07Merkblatt%20Transferleistungen%20Theorie%20-%20Praxis_102021.pdf
+https://moodle2.nordakademie.de/course/view.php?id=1584&section=1
 
 ## Neue Transferleistung erstellen
 
