@@ -1,7 +1,7 @@
 \newpage
 
 [//]: # de 
-# Abkürzungsverzeichnis
+# Abkürzungsverzeichnis {-}
 
 [//]: # en 
-# List of abbreviations
+# List of abbreviations {-}

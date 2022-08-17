@@ -1,7 +1,7 @@
 \newpage
 
 [//]: # de 
-# Abbildungsverzeichnis
+# Abbildungsverzeichnis {-}
 
 [//]: # en 
-# List of figures
+# List of figures {-}
