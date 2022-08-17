@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      paths: "TL1" "TL2" "TL3" "TL4" "TL5" "TL6"
+      paths: "TL1 TL2 TL3 TL4 TL5 TL6"
       filename: output
       titlepage: templates/2022_07_Deckblatt_Transferleistung.pdf
       tmp: pan
