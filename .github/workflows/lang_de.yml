@@ -1,4 +1,4 @@
-name: Spellchecking
+name: Spellchecking (de)
 on:
   pull_request:
 
