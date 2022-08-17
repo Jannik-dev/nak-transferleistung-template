@@ -1,8 +1,8 @@
 ---
 documentclass: book
 ...
-\newpage
 \backmatter
+\newpage
 
 [//]: # de 
 # Literaturverzeichnis {-}
