@@ -5,7 +5,7 @@ Mit diesem Template könnt ihr Transferleistungen mit Markdown schreiben. Dank d
 ### Note:
 Es sollte bei der Nutzung neue Branches für die Markdown Dateien angelegt werden, damit LanguageTool die Rechtschreibung bei einer Pull request überprüfen kann.
 
-### Aktuellste Dateien
+## Aktuellste Dateien
 Templates:
 
 https://moodle2.nordakademie.de/course/view.php?id=1584&section=4
