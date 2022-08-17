@@ -12,7 +12,9 @@ jobs:
 
       folder: TL1                                                                            # the name of the folder where the 'Transferleistung' is located
       titlepage: titlepage.pdf                                                               # the name of the titlepage (has to be a pdf)
-      md_files: 0_start.md 1_example.md a_end.md                                             # specify the order of the markdown files
+      md_files: 0_list_of_tables.md 1_list_of_figures.md 2_list_of_abbreviations.md 10_example.md a1_bibliography.md
+#        ^  specifies the order of the markdown files
+
       styles: style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.yaml    # you should only use one language in this job - choose one (if you want both than create a new folder)
 
 ################################### edit to here   ##########################################
