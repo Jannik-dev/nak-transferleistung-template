@@ -8,11 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       folder: TL1
+      titlepage: titlepage.pdf
       md_files: 0_start.md 1_main.md a_end.md
-      name_for_arial: arial
-      name_for_tnr: tnr
-      style_file_arial: style_en_arial.yaml
-      style_file_tnr: style_en_tnr.yaml
+      styles: style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.yaml
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -30,16 +28,21 @@ jobs:
       - name: Build PDFs
         working-directory: ${{ github.workspace }}
         run: |
+           for STYLE in ${{env.styles}};
+           do
+           echo ${STYLE}
            cd ${{env.folder}}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../${{env.style_file_arial}} ${{env.md_files}} -o ${{env.name_for_arial}}.pdf
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../${{env.style_file_tnr}} ${{env.md_files}} -o ${{env.name_for_tnr}}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
            cd ..
+           done
       - name: Combine PDFs
         run: |
+           for STYLE in ${{env.styles}};
+           do
            cd ${{env.folder}}
-           pdftk titlepage.pdf ${{env.name_for_arial}}.pdf cat output ${{env.folder}}_${{env.name_for_arial}}.pdf
-           pdftk titlepage.pdf ${{env.name_for_tnr}}.pdf cat output ${{env.folder}}_${{env.name_for_tnr}}.pdf
+           pdftk ${{env.titlepage}} ${STYLE}.pdf cat output ${{env.folder}}_${STYLE}.pdf
            cd ..
+           done
       - name: Upload combined PDFs
         uses: actions/upload-artifact@v3
         with:
