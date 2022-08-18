@@ -1,4 +1,4 @@
-name: Build TL1
+name: Build
 on:
   push:
   workflow_dispatch:
@@ -61,4 +61,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: "*/${{env.folder}}_*.pdf"
+          path: "*/*.pdf"
