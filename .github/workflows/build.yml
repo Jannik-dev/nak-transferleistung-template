@@ -35,7 +35,7 @@ jobs:
            mkdir build
            CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
            cd build
-           for CONF in $CONFIGURATION;
+           for CONF in $CONFIGURATIONS;
            do
            bash ${CONF}/config.sh
            echo "Creating dir build/${{end.folder}}"
@@ -46,7 +46,7 @@ jobs:
       - name: Build PDFs
         working-directory: ${{github.workspace}}
         run: |
-           for CONF in $CONFIGURATION;
+           for CONF in $CONFIGURATIONS;
            do
            bash ${CONF}/config.sh
            for STYLE in ${{env.styles}};
@@ -55,19 +55,6 @@ jobs:
            cd $CONF
            echo "Build PDF for ${CONF} with ${STYLE}"
            pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --table-of-contents --citeproc --abbreviations=${{env.abbreviations_file}} --number-sections --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
-           cd ..
-           done
-           done
-      - name: Combine PDFs
-        working-directory: ${{github.workspace}}
-        run: |
-           CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
-           for CONF in $CONFIGURATION;
-           do
-           bash ${CONF}/config.sh
-           for STYLE in ${{env.styles}};
-           do
-           cd $CONF
            echo "Combine PDF for ${CONF} with ${STYLE}"
            pdftk ${{env.titlepage}} ${STYLE}.pdf cat output ../build/$FOLDER/${{env.folder}}_${STYLE}.pdf
            cd ..
