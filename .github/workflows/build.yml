@@ -22,9 +22,12 @@ jobs:
       - name: Setup dirs
         run: bash .github/bin/setup.sh ${{github.workspace}}
       - name: Build PDFs
-        run: bash .github/bin/build.sh ${{github.workspace}}
+        run: |
+           bash .github/bin/build.sh ${{github.workspace}}
+           ls -al
+           ls -al build
       - name: Upload PDFs
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: "build/*"
+          path: "${{github.workspace}}/build/*"
