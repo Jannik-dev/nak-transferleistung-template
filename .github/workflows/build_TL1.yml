@@ -12,6 +12,7 @@ jobs:
 
       folder: TL1                                                                            # the name of the folder where the 'Transferleistung' is located
       titlepage: titlepage.pdf                                                               # the name of the titlepage (has to be a pdf)
+      acronyms_file: acronyms.json                                                           # the name of the acronyms file (has to be json)
       md_files: 0_list_of_tables.md 1_list_of_figures.md 2_list_of_abbreviations.md 10_example.md a1_bibliography.md
 #        ^  specifies the order of the markdown files
 
@@ -26,21 +27,27 @@ jobs:
         run: |
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get update
-          sudo apt-get -y install texlive ttf-mscorefonts-installer texlive-latex-extra texlive-xetex
+          sudo apt-get -y install texlive ttf-mscorefonts-installer texlive-latex-extra texlive-xetex pdftk
+      - name: Install python
+        uses: actions/setup-python@v4 
+        with:
+          python-version: 'pypy3.9'
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb
-      - name: Install pdftk
-        run: sudo apt install pdftk -y
+      - name: Install pandoc-acronyms
+        run: |
+          pip install pandoc-acronyms
+          export PANDOC_ACRONYMS_ACRONYMS=${{github.workspace}}/${{env.acronyms_file}}/${{env.folder}}/${{env.acronyms_file}}
       - name: Build PDFs
-        working-directory: ${{ github.workspace }}
+        working-directory: ${{github.workspace}}
         run: |
            for STYLE in ${{env.styles}};
            do
            echo ${STYLE}
            cd ${{env.folder}}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file --acronyms: PANDOC_ACRONYMS_ACRONYMS --filter pandoc-acronyms ${{env.md_files}} ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
            cd ..
            done
       - name: Combine PDFs
