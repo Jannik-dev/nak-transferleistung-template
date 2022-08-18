@@ -39,6 +39,7 @@ jobs:
       - name: Install pandoc-acronyms
         run: |
           pip install pandoc-acronyms
+          pip install panflute
           export PANDOC_ACRONYMS_ACRONYMS=${{github.workspace}}/${{env.acronyms_file}}/${{env.folder}}/${{env.acronyms_file}}
       - name: Build PDFs
         working-directory: ${{github.workspace}}
