@@ -38,8 +38,8 @@ jobs:
            for CONF in $CONFIGURATIONS;
            do
            bash ${CONF}/config.sh
-           echo "Creating dir build/${{end.folder}}"
-           mkdir ${{end.folder}}
+           echo "Creating dir build/${{env.folder}}"
+           mkdir ${{env.folder}}
            done
            cd ..
 
