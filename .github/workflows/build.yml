@@ -43,7 +43,6 @@ jobs:
            mkdir ${CONF_FOLDER}
            done
            cd ..
-find . -type f -name "config.sh" -exec dirname "{}" -printf
       - name: Build PDFs
         working-directory: ${{github.workspace}}
         run: |
