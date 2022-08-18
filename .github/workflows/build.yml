@@ -37,9 +37,9 @@ jobs:
            cd build
            for CONF in $CONFIGURATIONS;
            do
-           bash ${CONF}/config.sh
-           echo "Creating dir build/${{env.folder}}"
-           mkdir ${{env.folder}}
+           . ${CONF}/config.sh
+           echo "Creating dir build/${CONF_FOLDER}"
+           mkdir ${CONF_FOLDER}
            done
            cd ..
 
@@ -48,15 +48,15 @@ jobs:
         run: |
            for CONF in $CONFIGURATIONS;
            do
-           bash ${CONF}/config.sh
-           for STYLE in ${{env.styles}};
+           . ${CONF}/config.sh
+           for STYLE in ${CONF_STYLES};
            do
            echo ${STYLE}
            cd $CONF
            echo "Build PDF for ${CONF} with ${STYLE}"
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --table-of-contents --citeproc --abbreviations=${{env.abbreviations_file}} --number-sections --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --table-of-contents --citeproc --abbreviations=${CONF_ABBREVIATIONS_FILE} --number-sections --metadata-file ../${STYLE} ${CONF_MD_FILES} -o ${STYLE}.pdf
            echo "Combine PDF for ${CONF} with ${STYLE}"
-           pdftk ${{env.titlepage}} ${STYLE}.pdf cat output ../build/$FOLDER/${{env.folder}}_${STYLE}.pdf
+           pdftk ${CONF_COVER} ${STYLE}.pdf cat output ../build/$FOLDER/${CONF_FOLDER}_${STYLE}.pdf
            cd ..
            done
            done
