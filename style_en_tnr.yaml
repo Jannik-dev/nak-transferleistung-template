@@ -2,7 +2,6 @@
 documentclass: book
 lof: true
 lot: true
-bibliography: cites.bib
 lang: en-GB
 mainfont: Times New Roman
 fontsize: 12pt

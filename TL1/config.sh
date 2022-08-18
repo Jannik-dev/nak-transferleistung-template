@@ -12,6 +12,8 @@ MD_FILES=""
 STYLES="style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.yaml"
 #   ^  specifies the styles to use
 
+BIB_FILE="cites.bib"
+
 
 
 
@@ -19,4 +21,5 @@ STYLES="style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.y
 CONF_COVER="${COVER:-titlepage.pdf}"
 CONF_ABBREVIATIONS_FILE="${ABBREVIATIONS_FILE:-abbreviations}"
 CONF_MD_FILES="${MD_FILES:-*.md}"
+CONF_BIB="${BIB_FILE:-cites.bib}"
 CONF_STYLES="${STYLES:-style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.yaml}"
