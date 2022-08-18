@@ -1,5 +1,8 @@
 ---
 documentclass: book
+toc: true
+lof: true
+lot: true
 bibliography: cites.bib
 lang: de-DE
 mainfont: Times New Roman
