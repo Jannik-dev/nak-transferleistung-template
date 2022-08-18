@@ -3,12 +3,14 @@
 cd $1
 
 function generateBibPage() {
-    echo "# ${BIB_TITLE} {-}" > bib.md
-    echo "\leftskip=2em" >> bib.md
-    echo "\parindent=-2em" >> bib.md
+    echo "# ${BIB_TITLE} {-}" > tmp/bib.md
+    echo "\leftskip=2em" >> tmp/bib.md
+    echo "\parindent=-2em" >> tmp/bib.md
 }
 
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
+
+mkdir tmp
 
 for CONF in $CONFIGURATIONS; do
     CONF_FOLDER=$(basename ${CONF})
@@ -31,7 +33,7 @@ for CONF in $CONFIGURATIONS; do
         generateBibPage
 
         echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
-        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --citeproc --abbreviations=${CONF_ABBREVIATIONS_FILE} --number-sections --metadata-file ../${STYLE} ${CONF_MD_FILES} bib.md -o ${STYLE}.pdf
+        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --citeproc --abbreviations=${CONF_ABBREVIATIONS_FILE} --number-sections --metadata-file ../${STYLE} ${CONF_MD_FILES} tmp/bib.md -o ${STYLE}.pdf
 
         echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
         pdftk ${CONF_COVER} ${STYLE}.pdf cat output ../build/${CONF_FOLDER}/${CONF_FOLDER}_${STYLE}.pdf
