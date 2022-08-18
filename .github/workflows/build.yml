@@ -29,10 +29,20 @@ jobs:
       #    pip install panflute
       #    export PANDOC_ACRONYMS_ACRONYMS=${{github.workspace}}/${{env.acronyms_file}}/${{env.folder}}/${{env.acronyms_file}}
       # --filter pandoc-acronyms ${{env.md_files}}
+      - name: Setup
+        run: |
+           mkdir build
+           CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
+           cd build
+           for CONF in $CONFIGURATION;
+           do
+           mkdir ${{end.folder}}
+           done
+           cd ..
+
       - name: Build PDFs
         working-directory: ${{github.workspace}}
         run: |
-           CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
            for CONF in $CONFIGURATION;
            do
            bash $CONF/config.sh
@@ -53,7 +63,7 @@ jobs:
            for STYLE in ${{env.styles}};
            do
            cd $CONF
-           pdftk ${{env.titlepage}} ${STYLE}.pdf cat output ${{env.folder}}_${STYLE}.pdf
+           pdftk ${{env.titlepage}} ${STYLE}.pdf cat output ../build/$FOLDER/${{env.folder}}_${STYLE}.pdf
            cd ..
            done
            done
@@ -61,4 +71,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: "*/*.pdf"
+          path: "build/*/*.pdf"
