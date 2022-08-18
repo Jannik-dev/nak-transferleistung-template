@@ -6,19 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-
-################################### edit from here ##########################################
-
-      folder: TL1                                                                            # the name of the folder where the 'Transferleistung' is located
-      titlepage: titlepage.pdf                                                               # the name of the titlepage (has to be a pdf)
-      abbreviations_file: abbreviations.json                                                 # the name of the abbreviations file (has to be json)
-      md_files: 0_example.md
-#        ^  specifies the order of the markdown files
-
-      styles: style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.yaml    # you should only use one language in this job - choose one (if you want both than create a new folder)
-
-################################### edit to here   ##########################################
 
     steps:
       - name: Checkout repository
@@ -45,23 +32,33 @@ jobs:
       - name: Build PDFs
         working-directory: ${{github.workspace}}
         run: |
+           CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
+           for CONF in $CONFIGURATION;
+           do
+           bash $CONF/config.sh
            for STYLE in ${{env.styles}};
            do
            echo ${STYLE}
-           cd ${{env.folder}}
+           cd $CONF
            pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --table-of-contents --citeproc --abbreviations=${{env.abbreviations_file}} --number-sections --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
            cd ..
            done
+           done
       - name: Combine PDFs
         run: |
+           CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
+           for CONF in $CONFIGURATION;
+           do
+           bash $CONF/config.sh
            for STYLE in ${{env.styles}};
            do
-           cd ${{env.folder}}
+           cd $CONF
            pdftk ${{env.titlepage}} ${STYLE}.pdf cat output ${{env.folder}}_${STYLE}.pdf
            cd ..
+           done
            done
       - name: Upload combined PDFs
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: ${{env.folder}}/${{env.folder}}_*.pdf
+          path: "*/${{env.folder}}_*.pdf"
