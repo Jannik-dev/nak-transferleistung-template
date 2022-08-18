@@ -13,7 +13,7 @@ STYLES="style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.y
 #   ^  specifies the styles to use
 
 BIB_FILE="cites.bib"
-
+#   ^  specifies the bib file to use
 
 
 
