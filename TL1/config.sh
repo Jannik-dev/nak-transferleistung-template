@@ -20,5 +20,3 @@ CONF_COVER="${COVER:-titlepage.pdf}"
 CONF_ABBREVIATIONS_FILE="${ABBREVIATIONS_FILE:-abbreviations}"
 CONF_MD_FILES="${MD_FILES:-*.md}"
 CONF_STYLES="${STYLES:-style_de_arial.yaml style_de_tnr.yaml style_en_arial.yaml style_en_tnr.yaml}"
-
-CONF_FOLDER=$( basename "$PWD" )

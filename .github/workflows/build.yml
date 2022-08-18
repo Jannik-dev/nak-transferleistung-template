@@ -39,6 +39,7 @@ jobs:
            for CONF in $CONFIGURATIONS;
            do
            . ${CONF}/config.sh
+           CONF_FOLDER=$(basename ${CONF})
            echo "Creating dir build/${CONF_FOLDER}"
            mkdir ${CONF_FOLDER}
            done
@@ -49,6 +50,7 @@ jobs:
            for CONF in $CONFIGURATIONS;
            do
            . ${CONF}/config.sh
+           CONF_FOLDER=$(basename ${CONF})
            for STYLE in ${CONF_STYLES};
            do
            echo ${STYLE}
