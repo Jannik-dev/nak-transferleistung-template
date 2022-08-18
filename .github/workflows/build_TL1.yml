@@ -47,7 +47,7 @@ jobs:
            do
            echo ${STYLE}
            cd ${{env.folder}}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file --acronyms: PANDOC_ACRONYMS_ACRONYMS --filter pandoc-acronyms ${{env.md_files}} ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file --filter pandoc-acronyms ${{env.md_files}} ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
            cd ..
            done
       - name: Combine PDFs
