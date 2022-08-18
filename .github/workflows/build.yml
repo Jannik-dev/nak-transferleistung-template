@@ -47,6 +47,7 @@ jobs:
       - name: Build PDFs
         working-directory: ${{github.workspace}}
         run: |
+           CONFIGURATIONS=$(find ~+ -type f -name 'config.sh' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
            for CONF in $CONFIGURATIONS;
            do
            . ${CONF}/config.sh
