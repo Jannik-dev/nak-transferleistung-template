@@ -36,11 +36,12 @@ jobs:
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb
-      - name: Install pandoc-acronyms
-        run: |
-          pip install pandoc-acronyms
-          pip install panflute
-          export PANDOC_ACRONYMS_ACRONYMS=${{github.workspace}}/${{env.acronyms_file}}/${{env.folder}}/${{env.acronyms_file}}
+      #- name: Install pandoc-acronyms
+      #  run: |
+      #    pip install pandoc-acronyms
+      #    pip install panflute
+      #    export PANDOC_ACRONYMS_ACRONYMS=${{github.workspace}}/${{env.acronyms_file}}/${{env.folder}}/${{env.acronyms_file}}
+      # --filter pandoc-acronyms ${{env.md_files}}
       - name: Build PDFs
         working-directory: ${{github.workspace}}
         run: |
@@ -48,7 +49,7 @@ jobs:
            do
            echo ${STYLE}
            cd ${{env.folder}}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --filter pandoc-acronyms ${{env.md_files}} --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
            cd ..
            done
       - name: Combine PDFs
