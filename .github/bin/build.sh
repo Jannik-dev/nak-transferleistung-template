@@ -2,6 +2,8 @@
 
 cd $1
 
+mkdir tmp
+
 function generateBibPage() {
     cd tmp
     echo "# ${BIB_TITLE} {-}" > bib.md
@@ -11,8 +13,6 @@ function generateBibPage() {
 }
 
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
-
-mkdir tmp
 
 for CONF in $CONFIGURATIONS; do
     CONF_FOLDER=$(basename ${CONF})
