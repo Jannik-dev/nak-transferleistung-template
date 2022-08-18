@@ -3,9 +3,11 @@
 cd $1
 
 function generateBibPage() {
-    echo "# ${BIB_TITLE} {-}" > tmp/bib.md
-    echo "\leftskip=2em" >> tmp/bib.md
-    echo "\parindent=-2em" >> tmp/bib.md
+    cd tmp
+    echo "# ${BIB_TITLE} {-}" > bib.md
+    echo "\leftskip=2em" >> bib.md
+    echo "\parindent=-2em" >> bib.md
+    cd ..
 }
 
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
