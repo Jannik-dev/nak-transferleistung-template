@@ -34,6 +34,9 @@ jobs:
         run: |
            mkdir build
            CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
+           echo ${{github.workspace}}
+           echo "$(pwd)"
+           echo "$(ls -al)"
            cd build
            for CONF in $CONFIGURATIONS;
            do
