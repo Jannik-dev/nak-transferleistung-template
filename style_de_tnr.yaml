@@ -1,5 +1,5 @@
 ---
-documentclass: book
+documentclass: books
 bibliography: cites.bib
 lang: de-DE
 mainfont: Times New Roman
