@@ -1,5 +1,5 @@
 ---
-documentclass: books
+documentclass: book
 toc: true
 lof: true
 lot: true
