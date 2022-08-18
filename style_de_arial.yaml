@@ -1,4 +1,9 @@
 ---
+toc: true
+lof: true
+lot: true
+loa: true
+documentclass: book
 bibliography: cites.bib
 lang: de-DE
 mainfont: Arial

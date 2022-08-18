@@ -12,7 +12,6 @@ jobs:
 
       folder: TL1                                                                            # the name of the folder where the 'Transferleistung' is located
       titlepage: titlepage.pdf                                                               # the name of the titlepage (has to be a pdf)
-      bib_file: cites.bib                                                                    # the name of the biobliography file
       md_files: 0_list_of_tables.md 1_list_of_figures.md 2_list_of_abbreviations.md 10_example.md a1_bibliography.md
 #        ^  specifies the order of the markdown files
 
@@ -41,7 +40,7 @@ jobs:
            do
            echo ${STYLE}
            cd ${{env.folder}}
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --bibliography=${{env.bib_file}} --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
+           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --toc --number-sections --metadata-file ../${STYLE} ${{env.md_files}} -o ${STYLE}.pdf
            cd ..
            done
       - name: Combine PDFs

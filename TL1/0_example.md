@@ -1,6 +1,5 @@
 ---
 title-meta: 'The title goes here'
-documentclass: book
 ...
 \mainmatter
 

@@ -1,4 +1,5 @@
 ---
+documentclass: books
 bibliography: cites.bib
 lang: en-GB
 mainfont: Arial
