@@ -1,6 +1,5 @@
 ---
 documentclass: book
-toc: true
 lof: true
 lot: true
 bibliography: cites.bib
