@@ -14,6 +14,8 @@ CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \;
 
 for CONF in $CONFIGURATIONS; do
     CONF_FOLDER=$(basename ${CONF})
+    cd $CONF
+
     CONF_COVER=$(sed -n 's/COVER=//p' properties.ini)
     CONF_ABBREVIATIONS_FILE=$(sed -n 's/ABBREVIATIONS_FILE=//p' properties.ini)
     CONF_MD_FILES=$(sed -n 's/MD_FILES=//p' properties.ini)
@@ -22,7 +24,6 @@ for CONF in $CONFIGURATIONS; do
 
     for STYLE in ${CONF_STYLES}; do
         echo ${STYLE}
-        cd $CONF
 
         if echo ${STYLE} | grep de-DE; then 
             $BIB_TITLE="Literaturverzeichnis"
@@ -37,7 +38,7 @@ for CONF in $CONFIGURATIONS; do
 
         echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
         pdftk ${CONF_COVER} ${STYLE}.pdf cat output ../build/${CONF_FOLDER}/${CONF_FOLDER}_${STYLE}.pdf
-
-        cd ..
     done
+
+    cd ..
 done
