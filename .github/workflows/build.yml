@@ -38,7 +38,7 @@ jobs:
            cd build
            for CONF in $CONFIGURATIONS;
            do
-           . ${{github.workspace}}/${CONF}/config.sh
+           . ${CONF}/config.sh
            echo "Creating dir build/${CONF_FOLDER}"
            mkdir ${CONF_FOLDER}
            done
@@ -48,7 +48,7 @@ jobs:
         run: |
            for CONF in $CONFIGURATIONS;
            do
-           . ${{github.workspace}}/${CONF}/config.sh
+           . ${CONF}/config.sh
            for STYLE in ${CONF_STYLES};
            do
            echo ${STYLE}
