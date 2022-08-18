@@ -7,4 +7,4 @@ title-meta: 'The title goes here'
 
 Write your text here... 
 
-\cite{androidInterviews}
+@androidInterviews
