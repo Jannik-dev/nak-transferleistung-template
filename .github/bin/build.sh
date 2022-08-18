@@ -3,7 +3,7 @@
 cd $1
 
 function generateBibPage() {
-    echo "# ${BIB_TITLE} {-}" >> bib.md
+    echo "# ${BIB_TITLE} {-}" > bib.md
     echo "\leftskip=2em" >> bib.md
     echo "\parindent=-2em" >> bib.md
 }
@@ -23,7 +23,7 @@ for CONF in $CONFIGURATIONS; do
     for STYLE in ${CONF_STYLES}; do
         echo ${STYLE}
 
-        if echo ${STYLE} | grep de-DE; then 
+        if grep -q "de-DE" ${STYLE}; then 
             BIB_TITLE="Literaturverzeichnis"
         else 
             BIB_TITLE="Bibliography"
