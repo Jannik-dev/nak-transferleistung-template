@@ -26,9 +26,9 @@ for CONF in $CONFIGURATIONS; do
         echo ${STYLE}
 
         if echo ${STYLE} | grep de-DE; then 
-            $BIB_TITLE="Literaturverzeichnis"
+            BIB_TITLE="Literaturverzeichnis"
         else 
-            $BIB_TITLE="Bibliography"
+            BIB_TITLE="Bibliography"
         fi
 
         generateBibPage
