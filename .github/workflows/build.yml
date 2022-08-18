@@ -30,6 +30,7 @@ jobs:
       #    export PANDOC_ACRONYMS_ACRONYMS=${{github.workspace}}/${{env.acronyms_file}}/${{env.folder}}/${{env.acronyms_file}}
       # --filter pandoc-acronyms ${{env.md_files}}
       - name: Setup
+        working-directory: ${{github.workspace}}
         run: |
            mkdir build
            CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
@@ -58,6 +59,7 @@ jobs:
            done
            done
       - name: Combine PDFs
+        working-directory: ${{github.workspace}}
         run: |
            CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
            for CONF in $CONFIGURATION;
