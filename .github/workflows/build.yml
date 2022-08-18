@@ -29,7 +29,7 @@ jobs:
       #    pip install panflute
       #    export PANDOC_ACRONYMS_ACRONYMS=${{github.workspace}}/${{env.acronyms_file}}/${{env.folder}}/${{env.acronyms_file}}
       # --filter pandoc-acronyms ${{env.md_files}}
-      - name: Setup
+      - name: Setup dirs
         working-directory: ${{github.workspace}}
         run: |
            mkdir build
