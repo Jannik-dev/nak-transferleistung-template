@@ -20,53 +20,14 @@ jobs:
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb    
       - name: Setup dirs
-        working-directory: ${{github.workspace}}
-        run: |
-           mkdir build
-           CONFIGURATIONS=$(find ~+ -type f -name 'config.sh' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
-           cd build
-
-           for CONF in $CONFIGURATIONS;
-           do
-           . ${CONF}/config.sh
-           CONF_FOLDER=$(basename ${CONF})
-           echo "Creating dir build/${CONF_FOLDER}"
-           mkdir ${CONF_FOLDER}
-           done
-
-           cd ..
+        run: bash .github/bin/setup.sh ${{github.workspace}}
       - name: Build PDFs
-        working-directory: ${{github.workspace}}
         run: |
-           CONFIGURATIONS=$(find ~+ -type f -name 'config.sh' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
-
-           for CONF in $CONFIGURATIONS;
-           do
-           . ${CONF}/config.sh
-           CONF_FOLDER=$(basename ${CONF})
-
-           for STYLE in ${CONF_STYLES};
-           do
-           echo ${STYLE}
-           cd $CONF
-
-           if echo ${STYLE} | grep de-DE; then $BIB_TITLE="Literaturverzeichnis"; else $BIB_TITLE="Bibliography"; fi
-           echo "\newpage" >> bib.md
-           echo "# $BIB_TITLE {-}" >> bib.md
-           echo "\leftskip=2em" >> bib.md
-           echo "\parindent=-2em" >> bib.md
-
-           echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
-           pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --citeproc --abbreviations=${CONF_ABBREVIATIONS_FILE} --number-sections --metadata-file ../${STYLE} ${CONF_MD_FILES} bib.md -o ${STYLE}.pdf
-
-           echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
-           pdftk ${CONF_COVER} ${STYLE}.pdf cat output ../build/${CONF_FOLDER}/${CONF_FOLDER}_${STYLE}.pdf
-
-           cd ..
-           done
-           done
+           bash .github/bin/build.sh ${{github.workspace}}
+           ls -al
+           ls -al build
       - name: Upload combined PDFs
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: "build/*"
+          path: "${{github.workspace}}/build/*"
