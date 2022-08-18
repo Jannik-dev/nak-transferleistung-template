@@ -34,7 +34,7 @@ jobs:
         run: |
            mkdir build
            CONFIGURATIONS=$(find . -type f -name 'config.sh' | sed -r 's|/[^/]+$||')
-           echo "$(ls -al TL1/)"
+           echo $CONFIGURATIONS
            cd build
            for CONF in $CONFIGURATIONS;
            do
@@ -65,4 +65,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: "build/*/*.pdf"
+          path: "build/*"
