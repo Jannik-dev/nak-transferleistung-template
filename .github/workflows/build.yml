@@ -58,7 +58,7 @@ jobs:
            echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
            pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --citeproc --table-of-contents --citeproc --abbreviations=${CONF_ABBREVIATIONS_FILE} --number-sections --metadata-file ../${STYLE} ${CONF_MD_FILES} -o ${STYLE}.pdf
            echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
-           pdftk ${CONF_COVER} ${STYLE}.pdf cat output ../build/$FOLDER/${CONF_FOLDER}_${STYLE}.pdf
+           pdftk ${CONF_COVER} ${STYLE}.pdf cat output ../build/${CONF_FOLDER}/${CONF_FOLDER}_${STYLE}.pdf
            cd ..
            done
            done
