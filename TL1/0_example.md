@@ -1,7 +1,6 @@
 ---
 title-meta: 'The title goes here'
 ...
-\mainmatter
 
 # Example 
 
