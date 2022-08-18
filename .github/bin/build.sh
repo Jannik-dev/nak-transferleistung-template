@@ -21,9 +21,8 @@ for CONF in $CONFIGURATIONS; do
     CONF_STYLES=$(sed -n 's/STYLES=//p' properties.ini)
 
     for STYLE in ${CONF_STYLES}; do
-        echo ${STYLE}
 
-        if grep -q "de-DE" ${STYLE}; then 
+        if grep -q "de-DE" ../${STYLE}; then 
             BIB_TITLE="Literaturverzeichnis"
         else 
             BIB_TITLE="Bibliography"
