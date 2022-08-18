@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd ${1}
+
 mkdir build
 CONFIGURATIONS=$(find ~+ -type f -name 'config.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
 cd build

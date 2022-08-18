@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd ${1}
+
 function generateBibPage() {
     echo "\newpage" >> bib.md
     echo "# ${BIB_TITLE} {-}" >> bib.md
