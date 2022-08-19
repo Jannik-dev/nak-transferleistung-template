@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 cd $1
 
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
