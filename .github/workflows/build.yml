@@ -24,6 +24,8 @@ jobs:
         run:  |
           sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
           tlmgr update --self --all --reinstall-forcibly-removed
+      - name: Latex version
+        run: echo $(latex --version)
       - name: Install latex package acro (requires nicematrix)
         run: |
           wget "https://mirrors.ctan.org/macros/latex/contrib/acro.zip"
@@ -41,8 +43,6 @@ jobs:
           DIR=$(kpsewhich -var-value=TEXMFHOME)
           mkdir -p ${DIR}/tex/latex/commonstuff/
           cp nicematrix/nicematrix.sty ${DIR}/tex/latex/commonstuff/
-          echo "Is it here?"
-          echo ${DIR}
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
