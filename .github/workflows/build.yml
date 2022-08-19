@@ -33,30 +33,11 @@ jobs:
           export PATH=/usr/local/texlive/2022/bin/x86_64-linux:$PATH    
           export INFOPATH=$INFOPATH:/usr/local/texlive/2022/texmf-dist/doc/info
           export MANPATH=$MANPATH:/usr/local/texlive/2022/texmf-dist/doc/man
-      - name: Latex version
-        run: echo $(latex --version)
-      - name: Install latex package acro (requires nicematrix)
-        run: |
-          wget "https://mirrors.ctan.org/macros/latex/contrib/acro.zip"
-          unzip acro
-          DIR=$(kpsewhich -var-value=TEXMFHOME)
-          mkdir -p ${DIR}/tex/latex/commonstuff/
-          cp acro/acro.sty ${DIR}/tex/latex/commonstuff/
-      - name: Install latex package nicematrix
-        run: |
-          wget "https://mirrors.ctan.org/macros/latex/contrib/nicematrix.zip"
-          unzip nicematrix
-          cd nicematrix
-          latex nicematrix.ins
-          cd ..
-          DIR=$(kpsewhich -var-value=TEXMFHOME)
-          mkdir -p ${DIR}/tex/latex/commonstuff/
-          cp nicematrix/nicematrix.sty ${DIR}/tex/latex/commonstuff/
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb
-      - name: Install pandoc package pandoc-acro (requires acro)
+      - name: Install pandoc package pandoc-acro
         run: |
           wget "https://github.com/kprussing/pandoc-acro/archive/afde5ef.zip"
           unzip afde5ef.zip
