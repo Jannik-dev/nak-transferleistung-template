@@ -26,7 +26,9 @@ jobs:
         run: |
           wget "https://mirrors.ctan.org/macros/latex/contrib/acro.zip"
           unzip acro
-          ln -s acro/acro2.sty ~/texmf
+          DIR=$(kpsewhich -var-value=TEXMFHOME)
+          mkdir -p ${DIR}/tex/latex/commonstuff/
+          ln -s acro/acro2.sty ${DIR}/tex/latex/commonstuff/
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
