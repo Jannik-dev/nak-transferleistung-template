@@ -12,6 +12,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Update system
         run: | 
+          sudo add-apt-repository universe
           sudo apt-get upgrade
           sudo apt-get update
       - name: Install python
@@ -23,16 +24,7 @@ jobs:
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get -y install ttf-mscorefonts-installer
       - name: Install latex
-        run: |
-          cd /tmp
-          wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-          zcat install-tl-unx.tar.gz | tar xf -
-          rm -rf install-tl-unx.tar.gz
-          cd install-tl-*
-          sudo perl ./install-tl --no-interaction
-          export PATH=/usr/local/texlive/2022/bin/x86_64-linux:$PATH    
-          export INFOPATH=$INFOPATH:/usr/local/texlive/2022/texmf-dist/doc/info
-          export MANPATH=$MANPATH:/usr/local/texlive/2022/texmf-dist/doc/man
+        run: sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
