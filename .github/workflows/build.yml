@@ -14,7 +14,8 @@ jobs:
         run: |
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get update
-          sudo apt-get -y install texlive ttf-mscorefonts-installer tex-common texlive-full texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-xetex pdftk python3 xzdec
+          sudo apt-get -y install texlive-full ttf-mscorefonts-installer pdftk python3
+          sudo tlmgr update --self --all --reinstall-forcibly-removed
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
