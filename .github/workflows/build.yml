@@ -24,18 +24,18 @@ jobs:
         run:  |
           sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
           echo "Here is acro:"
-          echo $(kpsewhich acro2.sty)
+          echo $(kpsewhich acro.sty)
       - name: Install latex package acro
         run: |
           wget "https://mirrors.ctan.org/macros/latex/contrib/acro.zip"
           unzip acro
           DIR=$(kpsewhich -var-value=TEXMFHOME)
           mkdir -p ${DIR}/tex/latex/commonstuff/
-          cp acro/acro2.sty ${DIR}/tex/latex/commonstuff/
+          cp acro/acro.sty ${DIR}/tex/latex/commonstuff/
           echo "This is dir"
           echo ${DIR}
           echo "Here is acro:"
-          echo $(kpsewhich acro2.sty)
+          echo $(kpsewhich acro.sty)
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
