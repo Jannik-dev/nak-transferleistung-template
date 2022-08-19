@@ -32,6 +32,8 @@ jobs:
           DIR=$(kpsewhich -var-value=TEXMFHOME)
           mkdir -p ${DIR}/tex/latex/commonstuff/
           ln -s acro/acro2.sty ${DIR}/tex/latex/commonstuff/
+          echo "This is dir"
+          echo ${DIR}
           echo "Here is acro:"
           echo $(kpsewhich acro2.sty)
       - name: Install pandoc
