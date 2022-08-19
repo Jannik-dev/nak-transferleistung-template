@@ -2,10 +2,14 @@
 
 Write your text here... 
 
-[+ac]
+\ac{afaik}
 
-[+ac]
+\ac{afaik}
 
 [+ac]{.full .plural}
 
 @androidInterviews
+
+\newpage
+
+Hello
