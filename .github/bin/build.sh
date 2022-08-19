@@ -8,6 +8,10 @@ function generateBibPage() {
     echo "\parindent=-2em" >> ~/tmp/bib.md
 }
 
+function generateAbbrevPage() {
+    echo "# ${ACR_TITLE} {-}" > ~/tmp/acr.md
+}
+
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
 
 for CONF in $CONFIGURATIONS; do
@@ -25,14 +29,16 @@ for CONF in $CONFIGURATIONS; do
 
         if grep -q "de-DE" ${STYLE}; then 
             BIB_TITLE="Literaturverzeichnis"
+            ACR_TITLE="Abkürzungsverzeichnis"
         else 
             BIB_TITLE="Bibliography"
+            ACR_TITLE="Acronyms"
         fi
 
         generateBibPage
 
         echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
-        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --bibliography=$CONF/${CONF_BIB_FILE} --citeproc --number-sections --filter pandoc-acro $CONF/${CONF_MD_FILES} --metadata-file ${STYLE} $CONF/${CONF_MD_FILES} ~/tmp/bib.md -o ~/tmp/${STYLE}.pdf
+        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --bibliography=$CONF/${CONF_BIB_FILE} --citeproc --number-sections --filter pandoc-acro $CONF/${CONF_MD_FILES} --include-before-body=~/tmp/acr.md --metadata-file ${STYLE} $CONF/${CONF_MD_FILES} ~/tmp/bib.md -o ~/tmp/${STYLE}.pdf
 
         echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
         pdftk $CONF/${CONF_COVER} ~/tmp/${STYLE}.pdf cat output ~/build/${CONF_FOLDER}/${CONF_FOLDER}_${STYLE}.pdf
