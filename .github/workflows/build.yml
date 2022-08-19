@@ -15,8 +15,7 @@ jobs:
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get update
           sudo apt-get -y install texlive ttf-mscorefonts-installer texlive-latex-extra texlive-xetex pdftk python3 xzdec
-          sudo mkdir /root/texmf
-          tlmgr init-usertree
+          sudo tlmgr init-usertree
           sudo $(which tlmgr) install acro
       - name: Install pandoc
         run: |
