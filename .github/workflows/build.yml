@@ -40,7 +40,7 @@ jobs:
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb
-      - name: Install pandoc-acro (requires acro)
+      - name: Install pandoc package pandoc-acro (requires acro)
         run: |
           wget "https://github.com/kprussing/pandoc-acro/archive/afde5ef.zip"
           unzip afde5ef.zip
