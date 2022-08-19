@@ -2,7 +2,6 @@
 documentclass: book
 lof: true
 lot: true
-bibliography: cites.bib
 lang: en-GB
 mainfont: Times New Roman
 fontsize: 12pt
@@ -15,4 +14,7 @@ margin-left: 2cm
 margin-right: 2cm
 margin-top: 2cm
 margin-bottom: 2cm
+acronyms:
+  AC:
+    long: air conditioner
 ...
