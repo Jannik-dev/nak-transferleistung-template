@@ -36,6 +36,7 @@ for CONF in $CONFIGURATIONS; do
         fi
 
         generateBibPage
+        generateAbbrevPage
 
         echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
         pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --bibliography=$CONF/${CONF_BIB_FILE} --citeproc --number-sections --filter pandoc-acro $CONF/${CONF_MD_FILES} --include-before-body=~/tmp/acr.md --metadata-file ${STYLE} $CONF/${CONF_MD_FILES} ~/tmp/bib.md -o ~/tmp/${STYLE}.pdf
