@@ -30,7 +30,9 @@ jobs:
           rm -rf install-tl-unx.tar.gz
           cd install-tl-*
           sudo perl ./install-tl --no-interaction
-          PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
+          export PATH=/usr/local/texlive/2022/bin/x86_64-linux:$PATH    
+          export INFOPATH=$INFOPATH:/usr/local/texlive/2022/texmf-dist/doc/info
+          export MANPATH=$MANPATH:/usr/local/texlive/2022/texmf-dist/doc/man
       - name: Latex version
         run: echo $(latex --version)
       - name: Install latex package acro (requires nicematrix)
