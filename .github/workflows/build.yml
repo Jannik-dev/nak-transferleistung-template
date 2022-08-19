@@ -25,7 +25,7 @@ jobs:
       - name: Install latex
         run: |
           cd /tmp
-          wget http://ctan.sharelatex.com/tex-archive/systems/texlive/tlnet/install-tl-unx.tar.gz
+          wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
           zcat install-tl-unx.tar.gz | tar xf -
           rm -rf install-tl-unx.tar.gz
           cd install-tl-*
