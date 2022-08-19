@@ -3,10 +3,9 @@
 set -e
 
 function generateBibPage() {
-    #echo "# ${BIB_TITLE} {-}" > ${HOME}/tmp/bib.md
-    #echo "\leftskip=2em" >> ${HOME}/tmp/bib.md
-    #echo "\parindent=-2em" >> ${HOME}/tmp/bib.md
-    echo "\printbibliography" > ${HOME}/tmp/bib.md
+    echo "# ${BIB_TITLE} {-}" > ${HOME}/tmp/bib.md
+    echo "\leftskip=2em" >> ${HOME}/tmp/bib.md
+    echo "\parindent=-2em" >> ${HOME}/tmp/bib.md
 }
 
 function generateAbbrevPage() {
