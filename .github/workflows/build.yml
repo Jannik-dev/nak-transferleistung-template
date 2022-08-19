@@ -23,12 +23,14 @@ jobs:
       - name: Install latex
         run: sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
       - name: Install latex package bigfoot
+        run: |
           wget "https://mirrors.ctan.org/macros/latex/contrib/bigfoot.zip"
           unzip bigfoot
           cd bigfoot
           latex bigfoot.ins
           cd ..
       - name: Install latex package acronym (requires bigfoot)
+        run: |
           wget "https://mirrors.ctan.org/macros/latex/contrib/acronym.zip"
           unzip acronym
           cd acronym
