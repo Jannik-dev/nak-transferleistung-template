@@ -2,9 +2,13 @@
 
 Write your text here... 
 
-\ac{afaik}
+\ac{ac}
 
-\ac{afaik}
+\ac{ac}
+
++ac
+
++ac
 
 [+ac]{.full .plural}
 
