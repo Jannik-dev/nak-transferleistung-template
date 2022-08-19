@@ -39,6 +39,8 @@ jobs:
           DIR=$(kpsewhich -var-value=TEXMFHOME)
           mkdir -p ${DIR}/tex/latex/commonstuff/
           cp nicematrix/nicematrix.sty ${DIR}/tex/latex/commonstuff/
+          echo "Is it here?"
+          echo ${DIR}
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
