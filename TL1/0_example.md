@@ -2,15 +2,15 @@
 
 Write your text here... 
 
-\ac{ac}
+\ac{AC}
 
-\ac{ac}
+\ac{AC}
 
-+ac
++AC
 
-+ac
++AC
 
-[+ac]{.full .plural}
+[+AC]{.full .plural}
 
 @androidInterviews
 
