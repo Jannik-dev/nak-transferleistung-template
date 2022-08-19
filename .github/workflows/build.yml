@@ -22,25 +22,16 @@ jobs:
           sudo apt-get -y install ttf-mscorefonts-installer
       - name: Install latex
         run: sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
-      - name: Install latex package bigfoot
+      - name: Install latex package acro
         run: |
-          wget "https://mirrors.ctan.org/macros/latex/contrib/bigfoot.zip"
-          unzip bigfoot
-          cd bigfoot
-          latex bigfoot.ins
-          cd ..
-      - name: Install latex package acronym (requires bigfoot)
-        run: |
-          wget "https://mirrors.ctan.org/macros/latex/contrib/acronym.zip"
-          unzip acronym
-          cd acronym
-          latex acronym.ins
-          cd ..
+          wget "https://mirrors.ctan.org/macros/latex/contrib/acro.zip"
+          unzip acro
+          ln -s acro/acro2.sty ~/texmf
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
           sudo dpkg -i pandoc-2.19-1-amd64.deb
-      - name: Install pandoc-acro (requires acronym)
+      - name: Install pandoc-acro (requires acro)
         run: |
           wget "https://github.com/kprussing/pandoc-acro/archive/afde5ef.zip"
           unzip afde5ef.zip
