@@ -21,8 +21,10 @@ jobs:
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get -y install ttf-mscorefonts-installer
       - name: Install latex
-        run: sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
-      - name: Install latex package acro (requieres nicematrix)
+        run:  |
+          sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
+          tlmgr update --self --all --reinstall-forcibly-removed
+      - name: Install latex package acro (requires nicematrix)
         run: |
           wget "https://mirrors.ctan.org/macros/latex/contrib/acro.zip"
           unzip acro
