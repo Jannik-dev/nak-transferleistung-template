@@ -23,9 +23,9 @@ jobs:
           unzip afde5ef.zip
           sudo python pandoc-acro-afde5ef6ed58292f75c076455b895344347c94f7/setup.py install
       - name: Setup dirs
-        run: bash .github/bin/setup.sh ${{github.workspace}}
+        run: bash .github/bin/setup.sh
       - name: Build PDFs
-        run: bash .github/bin/build.sh ${{github.workspace}}
+        run: bash .github/bin/build.sh
       - name: Upload PDFs
         uses: actions/upload-artifact@v3
         with:

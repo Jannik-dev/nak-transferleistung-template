@@ -2,8 +2,6 @@
 
 set -e
 
-cd $1
-
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
 
 mkdir -p ~/build
@@ -14,5 +12,3 @@ for CONF in $CONFIGURATIONS; do
 
     mkdir -p ~/build/${CONF_FOLDER}
 done
-
-cd ..
