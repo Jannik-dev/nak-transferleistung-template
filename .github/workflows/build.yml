@@ -16,6 +16,7 @@ jobs:
           sudo apt-get update
           sudo apt-get -y install texlive ttf-mscorefonts-installer texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-xetex pdftk python3 xzdec
           sudo ln -s /var/lib/texmf /root/texmf
+          echo $(find . -name "TLPDB.pm")
           sudo tlmgr update --all
           sudo tlmgr install acro
       - name: Install pandoc
