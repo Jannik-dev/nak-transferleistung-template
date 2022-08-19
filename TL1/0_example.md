@@ -2,13 +2,14 @@
 
 Write your text here... 
 
-\ac{AC}
-
-\ac{AC}
 
 +AC
 
 +AC
+
+\ac{AC}
+
+\ac{AC}
 
 [+AC]{.full .plural}
 
