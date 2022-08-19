@@ -23,8 +23,7 @@ jobs:
           unzip afde5ef.zip
           cd pandoc-acro-afde5ef6ed58292f75c076455b895344347c94f7
           ls -al
-          chmod +x setup.py
-          python setup.py install
+          sudo python setup.py install
           cd ..
       - name: Setup dirs
         run: bash .github/bin/setup.sh
