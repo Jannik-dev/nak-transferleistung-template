@@ -41,7 +41,7 @@ for CONF in $CONFIGURATIONS; do
 
         echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
         cd $CONF_FOLDER
-        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --bibliography=${CONF_BIB_FILE} --citeproc --number-sections --filter pandoc-acro ${CONF_MD_FILES} --metadata-file ../${STYLE} ${HOME}/tmp/acr.md ${CONF_MD_FILES} ${HOME}/tmp/bib.md -o ~/tmp/${STYLE}.pdf
+        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --bibliography=${CONF_BIB_FILE} --citeproc --number-sections --metadata-file ../${STYLE} --filter pandoc-acro ${HOME}/tmp/acr.md ${CONF_MD_FILES} ${HOME}/tmp/bib.md -o ~/tmp/${STYLE}.pdf
         cd ..
 
         echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
