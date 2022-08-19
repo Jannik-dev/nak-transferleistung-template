@@ -9,8 +9,10 @@ function generateBibPage() {
 }
 
 function generateAbbrevPage() {
-    echo "# ${ACR_TITLE} {-}" > ${HOME}/tmp/acr.md
-    echo "\newpage" > ${HOME}/tmp/acr.md
+    echo "---" > ${HOME}/tmp/acr.md
+    echo "title-meta: 'The title goes here'" >> ${HOME}/tmp/acr.md
+    echo "..." >> ${HOME}/tmp/acr.md
+    echo "# ${ACR_TITLE} {-}"  >> ${HOME}/tmp/acr.md
 }
 
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
