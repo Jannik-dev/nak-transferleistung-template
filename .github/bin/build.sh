@@ -3,14 +3,14 @@
 set -e
 
 function generateBibPage() {
-    echo "# ${BIB_TITLE} {-}" > ${HOME}/tmp/bib.md
-    echo "\leftskip=2em" >> ${HOME}/tmp/bib.md
-    echo "\parindent=-2em" >> ${HOME}/tmp/bib.md
+    #echo "# ${BIB_TITLE} {-}" > ${HOME}/tmp/bib.md
+    #echo "\leftskip=2em" >> ${HOME}/tmp/bib.md
+    #echo "\parindent=-2em" >> ${HOME}/tmp/bib.md
+    echo "\printbibliography" > ${HOME}/tmp/bib.md
 }
 
 function generateAbbrevPage() {
-    echo "# ${ACR_TITLE} {-}" > ${HOME}/tmp/acr.md
-    echo "\printacronyms" >> ${HOME}/tmp/acr.md
+    echo "\printacronyms" > ${HOME}/tmp/acr.md
 }
 
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
@@ -30,10 +30,8 @@ for CONF in $CONFIGURATIONS; do
 
         if grep -q "de-DE" ${STYLE}; then 
             BIB_TITLE="Literaturverzeichnis"
-            ACR_TITLE="Abkürzungsverzeichnis"
         else 
             BIB_TITLE="Bibliography"
-            ACR_TITLE="Acronyms"
         fi
 
         generateBibPage
