@@ -9,7 +9,8 @@ function generateBibPage() {
 }
 
 function generateAbbrevPage() {
-    echo "${ACR_TITLE}" > ${HOME}/tmp/acr.md
+    echo "# ${ACR_TITLE} {-}" > ${HOME}/tmp/acr.md
+    echo "\newpage" > ${HOME}/tmp/acr.md
 }
 
 CONFIGURATIONS=$(find ~+ -type f -name 'properties.ini' -exec dirname -z "{}" \; | sed -z 's/$/\n/')
@@ -41,7 +42,7 @@ for CONF in $CONFIGURATIONS; do
 
 
         echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
-        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --bibliography=$CONF/${CONF_BIB_FILE} --citeproc --number-sections --filter pandoc-acro $CONF/${CONF_MD_FILES} --include-before-body=${HOME}/tmp/acr.md --metadata-file ${STYLE} $CONF/${CONF_MD_FILES} ${HOME}/tmp/bib.md -o ~/tmp/${STYLE}.pdf
+        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --bibliography=$CONF/${CONF_BIB_FILE} --citeproc --number-sections --filter pandoc-acro $CONF/${CONF_MD_FILES} --metadata-file ${STYLE} ${HOME}/tmp/acr.md $CONF/${CONF_MD_FILES} ${HOME}/tmp/bib.md -o ~/tmp/${STYLE}.pdf
 
         echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
         pdftk $CONF/${CONF_COVER} ~/tmp/${STYLE}.pdf cat output ~/build/${CONF_FOLDER}/${CONF_FOLDER}_${STYLE}.pdf
