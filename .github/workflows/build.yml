@@ -29,7 +29,7 @@ jobs:
           zcat install-tl-unx.tar.gz | tar xf -
           rm -rf install-tl-unx.tar.gz
           cd install-tl-*
-          perl ./install-tl --no-interaction
+          sudo perl ./install-tl --no-interaction
           PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
       - name: Latex version
         run: echo $(latex --version)
