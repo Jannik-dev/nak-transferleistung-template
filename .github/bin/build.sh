@@ -34,7 +34,7 @@ for CONF in $CONFIGURATIONS; do
         generateBibPage
 
         echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
-        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --citeproc --abbreviations=${CONF_ABBREVIATIONS_FILE} --number-sections --metadata-file ../${STYLE} ${CONF_MD_FILES} tmp/bib.md -o ${STYLE}.pdf
+        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --citeproc --abbreviations=${CONF_ABBREVIATIONS_FILE} --number-sections --filter pandoc-acro ${CONF_MD_FILES} --metadata-file ../${STYLE} ${CONF_MD_FILES} tmp/bib.md -o ${STYLE}.pdf
 
         echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
         pdftk ${CONF_COVER} ${STYLE}.pdf cat output ../build/${CONF_FOLDER}/${CONF_FOLDER}_${STYLE}.pdf
