@@ -23,7 +23,6 @@ for CONF in $CONFIGURATIONS; do
     CONF_ABBREVIATIONS_FILE=$(sed -n 's/ABBREVIATIONS_FILE=//p' $CONF/properties.ini)
     CONF_BIB_FILE=$(sed -n 's/BIB_FILE=//p' $CONF/properties.ini)
     CONF_MD_FILES=$(sed -n 's/MD_FILES=//p' $CONF/properties.ini)
-    CONF_MD_FILES=${CONF_MD_FILES:-*.md}
     CONF_STYLES=$(sed -n 's/STYLES=//p' $CONF/properties.ini)
 
     for STYLE in ${CONF_STYLES}; do
