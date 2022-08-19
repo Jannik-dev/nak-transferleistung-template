@@ -15,6 +15,7 @@ jobs:
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get update
           sudo apt-get -y install texlive ttf-mscorefonts-installer texlive-latex-extra texlive-xetex pdftk python3
+          tlmgr install acro
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
