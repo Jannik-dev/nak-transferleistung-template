@@ -15,13 +15,9 @@ jobs:
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get update
           sudo apt-get -y install texlive-full ttf-mscorefonts-installer pdftk python3
-          wget "https://mirrors.ctan.org/macros/latex/contrib/bigfoot.zip"
           wget "https://mirrors.ctan.org/macros/latex/contrib/acronym.zip"
-          unzip bigfoot
           unzip acronym
-          latex bigfoot/bigfoot.ins
           latex acronym/acronym.ins
-
       - name: Install pandoc
         run: |
           wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
