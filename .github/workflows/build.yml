@@ -21,7 +21,7 @@ jobs:
           sudo dpkg -i pandoc-2.19-1-amd64.deb
           wget "https://github.com/kprussing/pandoc-acro/archive/afde5ef.zip"
           unzip afde5ef.zip
-          python afde5ef/setup.py install
+          python pandoc-acro-afde5ef6ed58292f75c076455b895344347c94f7/setup.py install
       - name: Setup dirs
         run: bash .github/bin/setup.sh ${{github.workspace}}
       - name: Build PDFs
