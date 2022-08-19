@@ -27,10 +27,10 @@ jobs:
           cd /tmp
           wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
           zcat install-tl-unx.tar.gz | tar xf -
+          rm -rf install-tl-unx.tar.gz
           cd install-tl-*
           perl ./install-tl --no-interaction
           PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
-          sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
       - name: Latex version
         run: echo $(latex --version)
       - name: Install latex package acro (requires nicematrix)
