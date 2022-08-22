@@ -10,37 +10,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Update system
-        run: | 
-          sudo add-apt-repository universe
-          sudo apt-get upgrade
-          sudo apt-get update
-      - name: Install python
-        run: sudo apt-get -y install python3
-      - name: Install pdftk
-        run: sudo apt-get -y install pdftk
-      - name: Install mscorefonts
-        run: | 
-          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
-          sudo apt-get -y install ttf-mscorefonts-installer
-      - name: Install latex
-        run: sudo apt-get -y install texlive texlive-latex-extra texlive-xetex
-      - name: Install pandoc
-        run: |
-          wget "https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb"
-          sudo dpkg -i pandoc-2.19-1-amd64.deb
-      - name: Install pandoc package pandoc-acro
-        run: |
-          wget "https://github.com/kprussing/pandoc-acro/archive/afde5ef.zip"
-          unzip afde5ef.zip
-          cd pandoc-acro-afde5ef6ed58292f75c076455b895344347c94f7
-          ls -al
-          sudo python setup.py install
-          cd ..
-      - name: Setup dirs
-        run: bash .github/bin/setup.sh
       - name: Build PDFs
-        run: bash .github/bin/build.sh
+        run: build.sh
+      - name: Copy build files from image
+        run: docker cp nakdocker:/build ~
       - name: Upload PDFs
         uses: actions/upload-artifact@v3
         with:

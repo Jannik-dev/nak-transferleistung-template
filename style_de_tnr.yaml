@@ -16,5 +16,6 @@ margin-top: 2cm
 margin-bottom: 2cm
 acronyms:
   AC:
+    short: ac
     long: air conditioner
 ...
