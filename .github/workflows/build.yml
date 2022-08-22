@@ -14,10 +14,8 @@ jobs:
         run: |
           ls -al
           bash build.sh
-      - name: Copy build files from image
-        run: docker cp nakdocker:/build ~
       - name: Upload PDFs
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: "/tmp/build/*"
+          path: "build/*"
