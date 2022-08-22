@@ -18,7 +18,17 @@ https://moodle2.nordakademie.de/course/view.php?id=1584&section=1
 
 1. Einen neuen Ordner anlegen
 2. Eine Titelseite aus dem templates Ordner in den Ordner kopieren
-3. Datei cites.bib im Ordner erstellen
+3. Eine bib Datei im Ordner erstellen
 4. Markdown files im Ordner anlegen
-5. Einen neuen build job unter .github/workflows/ anlegen
-6. Die env Variablen im build job anpassen
+5. Eine yaml Datei für styles der TL anlegen 
+6. Eine properties.ini Datei anlegen und die Werte anpassen
+
+## Eine Transferleistung bauen
+
+Option A) Einen Commit erstellen und pushen
+
+Du findest die Dateien dann unter Actions, den Commit auswählen und output herunterladen
+
+Option B) lokal build.sh ausführen
+
+Du findest die Dateien dann unter dem Ordner build
