@@ -31,4 +31,7 @@ Du findest die Dateien dann unter Actions, den Commit auswählen und output heru
 
 Option B) lokal build.sh ausführen
 
+### Note:
+Docker muss installiert sein (kann hier gedownloaded werden https://docs.docker.com/get-docker/)
+
 Du findest die Dateien dann unter dem Ordner build
