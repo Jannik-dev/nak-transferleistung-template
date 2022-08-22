@@ -1,10 +1,8 @@
 ---
 documentclass: book
-lof: true
-lot: true
-lang: en-GB
-mainfont: Times New Roman
-fontsize: 12pt
+lang: de-DE
+mainfont: Arial
+fontsize: 11pt
 linestretch: 1.25
 papersize: a4
 classoption:
@@ -14,8 +12,4 @@ margin-left: 2cm
 margin-right: 2cm
 margin-top: 2cm
 margin-bottom: 2cm
-acronyms:
-  AC:
-    short: ac
-    long: air conditioner
 ...

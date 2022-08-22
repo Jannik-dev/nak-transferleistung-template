@@ -8,7 +8,7 @@ mkdir -p ~/build
 
 for CONF in $CONFIGURATIONS; do
     CONF_FOLDER=$(basename ${CONF})
-    echo "Creating dir build/${CONF_FOLDER}"
+    echo "Creating dir /tmp/build/${CONF_FOLDER}"
 
     mkdir -p /tmp/build/${CONF_FOLDER}
 done

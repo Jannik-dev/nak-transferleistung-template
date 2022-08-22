@@ -1,7 +1,5 @@
 ---
 documentclass: book
-lof: true
-lot: true
 lang: en-GB
 mainfont: Arial
 fontsize: 11pt
@@ -14,8 +12,4 @@ margin-left: 2cm
 margin-right: 2cm
 margin-top: 2cm
 margin-bottom: 2cm
-acronyms:
-  AC:
-    short: ac
-    long: air conditioner
 ...
