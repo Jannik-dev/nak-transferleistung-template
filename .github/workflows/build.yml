@@ -11,7 +11,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Build PDFs
-        run: build.sh
+        run: |
+        ls -al
+        bash build.sh
       - name: Copy build files from image
         run: docker cp nakdocker:/build ~
       - name: Upload PDFs
