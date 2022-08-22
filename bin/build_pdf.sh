@@ -18,13 +18,12 @@ for CONF in $CONFIGURATIONS; do
     CONF_FOLDER=$(basename ${CONF})
 
     CONF_COVER=$(sed -n 's/COVER=//p' $CONF/properties.ini)
-    CONF_ABBREVIATIONS_FILE=$(sed -n 's/ABBREVIATIONS_FILE=//p' $CONF/properties.ini)
+    CONF_STYLE_FILE=$(sed -n 's/STYLE_FILE=//p' $CONF/properties.ini)
     CONF_BIB_FILE=$(sed -n 's/BIB_FILE=//p' $CONF/properties.ini)
     CONF_MD_FILES=$(sed -n 's/MD_FILES=//p' $CONF/properties.ini)
-    CONF_MD_FILES=${CONF_MD_FILES:-*.md}
-    CONF_STYLES=$(sed -n 's/STYLES=//p' $CONF/properties.ini)
+    CONF_META_STYLES=$(sed -n 's/META_STYLES=//p' $CONF/properties.ini)
 
-    for STYLE in ${CONF_STYLES}; do
+    for STYLE in ${CONF_META_STYLES}; do
 
         if grep -q "de-DE" ${STYLE}; then 
             BIB_TITLE="Literaturverzeichnis"
@@ -37,7 +36,19 @@ for CONF in $CONFIGURATIONS; do
 
         echo "Build PDF for ${CONF_FOLDER} with ${STYLE}"
         cd $CONF_FOLDER
-        pandoc --from markdown --to=pdf --pdf-engine=xelatex --embed-resources --standalone --table-of-contents --bibliography=${CONF_BIB_FILE} --citeproc --number-sections --metadata-file ../${STYLE} --filter pandoc-acro /tmp/acr.md ${CONF_MD_FILES} /tmp/bib.md -o /tmp/${STYLE}.pdf
+        pandoc --from markdown \
+            --to=pdf \
+            --pdf-engine=xelatex \
+            --embed-resources \
+            --standalone \
+            --bibliography=${CONF_BIB_FILE} \
+            --citeproc \
+            --number-sections \
+            --metadata-file ../meta_styles/${STYLE} \
+            --metadata-file ${CONF_STYLE_FILE} \
+            --filter pandoc-acro \
+            /tmp/acr.md ${CONF_MD_FILES} /tmp/bib.md \
+            -o /tmp/${STYLE}.pdf
         cd ..
 
         echo "Combine PDF for ${CONF_FOLDER} with ${STYLE}"
